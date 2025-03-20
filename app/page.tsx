@@ -1,11 +1,10 @@
 "use client"
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState} from "react";
 import Terminal from "./components/terminal";
 import Profile from "./components/profile";
 
 export default function Home() {
   const [nightMode, setNightMode] = useState(true);
-  const projectsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const elements = document.querySelectorAll(".fade-in");
@@ -17,11 +16,6 @@ export default function Home() {
     });
   }, []);
 
-  const scrollToProjects = () => {
-    if (projectsRef.current) {
-      projectsRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <div className={`${nightMode ? "bg-gray-900 text-gray-200" : "bg-gray-100 text-gray-900"} relative flex flex-col min-h-screen p-6 overflow-hidden transition-all duration-500`}>
@@ -36,7 +30,7 @@ export default function Home() {
 
         <Profile nightMode={nightMode} />
 
-        <Terminal scrollToProjects={scrollToProjects} />
+        <Terminal />
       </div>
 
     </div>

@@ -1,22 +1,19 @@
 "use client"
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from "next/navigation";
 
-export default function Terminal({scrollToProjects}) {
+export default function Terminal() {
     const commands = ["projects", "about", "resume", "clear"];
     const [terminalOutput, setTerminalOutput] = useState(["Welcome to my portfolio terminal!", "Type 'projects', 'about', or 'resume' to learn more."]); 
     const [terminalInput, setTerminalInput] = useState("");
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
     const [historyIndex, setHistoryIndex] = useState(-1);
-    const [isTyping, setIsTyping] = useState(false);
     const terminalRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+        if(terminalRef.current) terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }, [terminalOutput]);
 
     const typeResponse = (response: string) => {
-        setIsTyping(true);
         let index = 0;
         const interval = setInterval(() => {
             if (index < response.length) {
@@ -24,7 +21,6 @@ export default function Terminal({scrollToProjects}) {
                 index++;
             } else {
                 clearInterval(interval);
-                setIsTyping(false);
             }
         }, 50);
     };
@@ -39,7 +35,7 @@ export default function Terminal({scrollToProjects}) {
             switch (terminalInput.toLowerCase()) {
                 case "projects":
                     response = " Redirecting to projects page...";
-                    setTimeout(scrollToProjects, 1000);
+                    // setTimeout(scrollToProjects, 1000);
                     break;
                 case "about":
                     response = " I am a passionate engineer who loves solving problems with code. In my free time, I build web systems, explore system design, stay updated on machine learning algorithms, and enjoy solving mechanical problems using computational methods.";

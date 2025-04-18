@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 
 export default function Terminal() {
-    const commands = ["projects", "about", "resume", "clear"];
+    const commands = ["projects", "about", "resume", "clear", "project-details"];
     const [terminalOutput, setTerminalOutput] = useState(["Welcome to my portfolio terminal!", "Type 'projects', 'about', or 'resume' to learn more."]); 
     const [terminalInput, setTerminalInput] = useState("");
     const [commandHistory, setCommandHistory] = useState<string[]>([]);
@@ -13,16 +13,19 @@ export default function Terminal() {
         if(terminalRef.current) terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }, [terminalOutput]);
 
-    const typeResponse = (response: string) => {
-        let index = 0;
-        const interval = setInterval(() => {
-            if (index < response.length) {
-                setTerminalOutput(prev => [...prev.slice(0, -1), prev[prev.length - 1] + response[index]]);
-                index++;
-            } else {
-                clearInterval(interval);
+    const typeResponse = (response: string[]) => {
+        // Add each line of the response to the terminal output with a slight delay
+        let currentIndex = 0;
+        
+        const addNextLine = () => {
+            if (currentIndex < response.length) {
+                setTerminalOutput(prev => [...prev, response[currentIndex]]);
+                currentIndex++;
+                setTimeout(addNextLine, 50);
             }
-        }, 50);
+        };
+        
+        addNextLine();
     };
 
     const handleCommand = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -31,27 +34,53 @@ export default function Terminal() {
                 setCommandHistory(prev => [...prev, terminalInput]);
                 setHistoryIndex(-1);
             }
-            let response = "";
+            
+            setTerminalOutput(prev => [...prev, `$ ${terminalInput}`]);
+            
             switch (terminalInput.toLowerCase()) {
                 case "projects":
-                    response = " Redirecting to projects page...";
-                    // setTimeout(scrollToProjects, 1000);
+                    const projectsResponse = [
+                        "=== My Projects ===",
+                        "",
+                        "1. Portfolio Website",
+                        "   • Technologies: Next.js, TypeScript, Tailwind CSS",
+                        "   • Features: Interactive terminal, responsive design, dark mode",
+                        "",
+                        "2. Quizzing Platoform",
+                        "   • Technologies: Vue, firebase, Vercel",
+                        "   • Features: User authentication, State management",
+                        "",
+                        "3. TypeQuick",
+                        "   • Technologies: React, TypeScript, TailwindCSS",
+                        "   • Features: Typing speed test, Past history, State Management",
+                        "",
+                        "4. HashConsistent",
+                        "   • Technologies: TypeScript",
+                        "   • Features: System design, Consistent hashing",
+                        "",
+                        "Type 'project-details [number]' for more information about a specific project."
+                    ];
+                    typeResponse(projectsResponse);
                     break;
                 case "about":
-                    response = " I am a passionate engineer who loves solving problems with code. In my free time, I build web systems, explore system design, stay updated on machine learning algorithms, and enjoy solving mechanical problems using computational methods.";
+                    typeResponse(["I am a passionate engineer who loves solving problems with code. In my free time, I build web systems, explore system design, stay updated on machine learning algorithms, and enjoy solving mechanical problems using computational methods."]);
                     break;
                 case "resume":
-                    response = " Download my resume here: [Resume Link]";
+                    typeResponse(["Download my resume here: [Resume Link]"]);
                     break;
                 case "clear":
                     setTerminalOutput([]);
                     setTerminalInput("");
                     return;
                 default:
-                    response = "Command not found. Try 'projects', 'about', or 'resume'.";
+                    // Check if the command is asking for project details
+                    if (terminalInput.toLowerCase().startsWith("project-details")) {
+                        const projectNum = terminalInput.split(" ")[1];
+                        handleProjectDetails(projectNum);
+                    } else {
+                        typeResponse(["Command not found. Try 'projects', 'about', or 'resume'."]);
+                    }
             }
-            setTerminalOutput(prev => [...prev, `$ ${terminalInput}`, ""]);
-            typeResponse(response);
             setTerminalInput("");
         } else if (e.key === "ArrowUp" && commandHistory.length) {
             const newIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
@@ -69,6 +98,77 @@ export default function Terminal() {
             e.preventDefault();
             const matchingCommand = commands.find(cmd => cmd.startsWith(terminalInput));
             if (matchingCommand) setTerminalInput(matchingCommand);
+        }
+    };
+
+    const handleProjectDetails = (projectNum: string) => {
+        switch (projectNum) {
+            case "1":
+                typeResponse([
+                    "=== Portfolio Website ===",
+                    "",
+                    "This website showcases my skills and projects using modern web technologies.",
+                    "",
+                    "• Technologies: Next.js, TypeScript, Tailwind CSS",
+                    "• Features:",
+                    "  - Interactive terminal interface",
+                    "  - Responsive design for all devices",
+                    "  - Dark/light mode toggle",
+                    "  - Animation and transition effects",
+                    "",
+                    "• GitHub: github.com/piyushjhamnani/portfolio",
+                    "• Live Demo: https://piyush-jhamnani.vercel.app/",
+                ]);
+                break;
+            case "2":
+                typeResponse([
+                    "=== Quizzing Platoform ===",
+                    "",
+                    "Creating a Quizzing platform for making and taking quizzes.",
+                    "",
+                    "• Technologies: Vue, firebase, Vercel",
+                    "• Features:",
+                    "  - Interactive quiz creation interface",
+                    "  - User authentication",
+                    "  - Dark/light mode toggle",
+                    "",
+                    "• GitHub: https://github.com/PJiyush/Quizzing",
+                    "• Live Demo: https://quizzing-eta.vercel.app/",
+                ]);
+                break;
+            case "3":
+                typeResponse([
+                    "=== TypeQuick ===",
+                    "",
+                    "Created a typing speed test application to help users improve their typing skills.",
+                    "",
+                    "• Technologies: React, TypeScript, TailwindCSS",
+                    "• Features:",
+                    "  - Randomized typing tests",
+                    "  - real-time tracking of typing speed",
+                    "  - Past history of typing tests",
+                    "  - Dark/light mode toggle",
+                    "",
+                    "• GitHub: https://github.com/PJiyush/TypeQuick",
+                    "• Live Demo: https://type-quick.vercel.app/",
+                ]);
+                break;
+            case "4":
+                typeResponse([
+                    "=== HashConsistent ===",
+                    "",
+                    "This project implements a consistent hashing algorithm to distribute data across multiple nodes.",
+                    "",
+                    "• Technologies: TypeScript",
+                    "• Features:",
+                    "  - Consistent hashing algorithm implementation",
+                    "  - Data distribution across nodes",
+                    "",
+                    "• GitHub: https://github.com/PJiyush/HashConsistent",
+                ]);
+                break;
+            default:
+                typeResponse(["Project number not found. Please choose a number between 1-4."]);
         }
     };
 

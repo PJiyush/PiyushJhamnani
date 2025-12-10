@@ -1,5 +1,6 @@
 import Image from "next/image";
 export default function Profile({nightMode}:{nightMode:boolean}){
+    console.log("Profile rendered...");
     return(<div className={`relative flex flex-col items-center md:items-start p-8 rounded-2xl shadow-lg max-w-lg w-full fade-in ${nightMode ? "bg-gray-800" : "bg-white"} h-1/5 relative top-16`}>
         
         <div className="w-40 h-40 md:w-56 md:h-56 relative mb-4 fade-in -top-3">

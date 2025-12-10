@@ -1,7 +1,9 @@
 "use client"
 import { useState, useEffect, useRef } from "react";
+import React from "react";
 
-export default function Terminal() {
+function Terminal() {
+    console.log("Terminal rendered...");
     const commands = ["projects", "about", "resume", "clear", "project-details"];
     const [terminalOutput, setTerminalOutput] = useState(["Welcome to my portfolio terminal!", "Type 'projects', 'about', or 'resume' to learn more."]); 
     const [terminalInput, setTerminalInput] = useState("");
@@ -193,3 +195,5 @@ export default function Terminal() {
         </div>
     );
 }
+
+export default React.memo(Terminal)

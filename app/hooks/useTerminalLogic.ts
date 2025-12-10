@@ -14,7 +14,7 @@ export default function useTerminalLogic() {
 
   const terminalRef = useRef<HTMLDivElement>(null);
   const typeResponse = useTypeResponse(setTerminalOutput);
-  const { historyIndex, commandHistory, pushHistory, handleArrowKeys } =
+  const { pushHistory, handleArrowKeys } =
     useCommandHistory(terminalInput, setTerminalInput);
 
   const autocomplete = useAutocomplete();

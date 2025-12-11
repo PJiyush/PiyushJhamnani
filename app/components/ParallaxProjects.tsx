@@ -28,7 +28,7 @@ export default function ParallaxProjects({ projects = sampleProjects }) {
             title={project.title}
             description={project.description}
             tech={project.tech || ["React", "Node.js"]}
-            github={project.link}
+            github={project.github}
             image={project.img}
           />
         ))}

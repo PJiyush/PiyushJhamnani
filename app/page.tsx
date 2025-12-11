@@ -63,7 +63,7 @@ export default function Home() {
       <section className="py-32 flex flex-col items-center text-center">
         <h2 className="text-4xl font-bold mb-6">Want to Know More?</h2>
         <p className="opacity-80 mb-8 max-w-xl">
-          Here's my complete resume with experience, projects, and skills.  
+          Here is my complete resume with experience, projects, and skills.  
         </p>
 
         <a

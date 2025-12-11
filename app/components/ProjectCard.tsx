@@ -1,8 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { StaticImageData } from "next/image";
+interface ProjectCardProps {
+  title: string;
+  description: string;
+  tech: string[];
+  github: string;
+  image: string | StaticImageData;
+}
 
-export default function ProjectCard({ title, description, tech, github, image}) {
+export default function ProjectCard({ title, description, tech, github, image }: ProjectCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}

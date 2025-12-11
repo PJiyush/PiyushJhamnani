@@ -1,4 +1,4 @@
-export default [
+const projects =  [
     "",
     "=== My Projects ===",
     "",
@@ -16,3 +16,5 @@ export default [
     "",
     "Type 'project-details [number]' for more information about a specific project."
     ];
+
+export default projects

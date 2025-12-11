@@ -2,51 +2,35 @@ export default function projectDetails(id: string) {
   switch (id) {
     case "1":
       return [
-        "=== Portfolio Website ===",
+        "=== Rate Limited Caching System ===",
         "",
-        "This website showcases my skills and projects using modern web technologies.",
+        "An Implementation of Rate Limited Caching system, created on front of the URL shortener app.",
         "",
-        "• Technologies: Next.js, TypeScript, Tailwind CSS",
-        "• Features:",
-        "  - Interactive terminal interface",
-        "  - Responsive design for all devices",
-        "  - Dark/light mode toggle",
-        "  - Animation and transition effects",
-        "",
-        "• GitHub: github.com/piyushjhamnani/portfolio",
-        "• Live Demo: https://piyush-jhamnani.vercel.app/",
+        "• Technologies: FastAPI, Redis, PostgreSQL, Docker, Python",
+        "• GitHub: github.com/PJiyush/Design-RateLimited-Cached-system",
+        // "• Live Demo: https://piyush-jhamnani.vercel.app/",
       ];
 
     case "2":
       return [
-        "=== Quizzing Platform ===",
+        "=== Strapi-React App ===",
         "",
-        "Creating a Quizzing platform for making and taking quizzes.",
+        "A fullstack application created with headerless CMS",
         "",
-        "• Technologies: Vue, Firebase, Vercel",
-        "• Features:",
-        "  - Interactive quiz creation interface",
-        "  - User authentication",
-        "  - Dark/light mode toggle",
-        "",
-        "• GitHub: https://github.com/PJiyush/Quizzing",
-        "• Live Demo: https://quizzing-eta.vercel.app/",
+        "• Technologies: trapi, ReactJS, TypeScript",
+        "• GitHub: github.com/PJiyush/strapi-project",
+        // "• Live Demo: https://quizzing-eta.vercel.app/",
       ];
 
     case "3":
       return [
-        "=== TypeQuick ===",
+        "=== coverage-planning ===",
         "",
-        "Created a typing speed test application to help users improve their typing skills.",
+        "A FastAPI + Vanilla JS project that visualizes boustrophedon coverage with obstacle avoidance.",
         "",
-        "• Technologies: React, TypeScript, TailwindCSS",
-        "• Features:",
-        "  - Randomized typing tests",
-        "  - Real-time tracking of typing speed",
-        "  - Past history of typing tests",
-        "  - Dark/light mode toggle",
+        "• Technologies: FastAPI, JavaScript, Python",
         "",
-        "• GitHub: https://github.com/PJiyush/TypeQuick",
+        "• GitHub: github.com/PJiyush/coverage-planning",
         "• Live Demo: https://type-quick.vercel.app/",
       ];
 
